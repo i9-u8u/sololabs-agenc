@@ -7,8 +7,9 @@
     
     <style>
         :root {
-            --bg: #000000;
-            --card-bg: #0a0a0a;
+            --bg-center: #1e1b4b; 
+            --bg-outer: #000000; 
+            --card-bg: rgba(10, 10, 10, 0.6); 
             --primary: #a855f7;
             --secondary: #22d3ee;
             --success: #10b981;
@@ -20,7 +21,8 @@
 
         body {
             margin: 0; padding: 0;
-            background-color: var(--bg);
+            background: radial-gradient(circle at center, var(--bg-center) 0%, var(--bg-outer) 100%) no-repeat fixed;
+            background-size: cover;
             color: white;
             font-family: 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
@@ -33,13 +35,7 @@
 
         .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        /* Header */
-        header {
-            padding: 140px 0 80px 0;
-            text-align: center;
-            background: radial-gradient(circle at center, #1e1b4b 0%, #000000 100%);
-            animation: fadeInUp 0.8s ease-out;
-        }
+        header { padding: 140px 0 80px 0; text-align: center; animation: fadeInUp 0.8s ease-out; }
 
         h1 {
             font-size: clamp(3rem, 10vw, 5rem);
@@ -52,82 +48,56 @@
         }
 
         .btn {
-            display: inline-block;
-            padding: 18px 45px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 800;
-            transition: 0.4s;
-            text-transform: uppercase;
-            cursor: pointer;
-            border: none;
+            display: inline-block; padding: 18px 45px; border-radius: 100px;
+            text-decoration: none; font-weight: 800; transition: 0.4s;
+            text-transform: uppercase; cursor: pointer; border: none;
         }
 
         .btn-main { background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; }
         .btn:hover { transform: translateY(-5px); filter: brightness(1.2); box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3); }
 
-        /* Services Section (الذي كان ناقصاً) */
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 80px 0;
-        }
+        .section-title { text-align: center; margin-top: 80px; font-size: 2.5rem; font-weight: 800; }
+
+        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 50px 0; }
 
         .card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            transition: 0.4s;
-            animation: fadeInUp 1s ease-out;
+            background: var(--card-bg); padding: 40px; border-radius: 30px;
+            border: 1px solid var(--border); backdrop-filter: blur(10px);
+            transition: 0.4s; animation: fadeInUp 1s ease-out;
         }
 
         .card:hover { border-color: var(--primary); transform: translateY(-10px); }
         
-        .icon {
-            width: 50px; height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
+        /* تنسيق الأيقونات الجديدة */
+        .icon-box {
+            width: 60px; height: 60px;
             margin-bottom: 25px;
+            display: flex; align-items: center; justify-content: center;
         }
+        .icon-box svg { width: 100%; height: 100%; fill: url(#grad); }
 
-        /* Contact Box */
         .contact-box {
-            background: #080808;
-            padding: 50px 30px;
-            border-radius: 35px;
-            border: 1px solid var(--border);
-            max-width: 650px;
-            margin: 40px auto 100px auto;
-        }
-
-        #success-message {
-            display: none;
-            background: var(--success);
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            font-weight: bold;
-            text-align: center;
+            background: var(--card-bg); padding: 50px 30px; border-radius: 35px;
+            border: 1px solid var(--border); max-width: 650px; margin: 40px auto 100px auto;
+            backdrop-filter: blur(10px);
         }
 
         input, textarea {
-            width: 100%;
-            background: #000;
-            border: 1px solid var(--border);
-            padding: 18px;
-            color: white;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            outline: none;
+            width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border);
+            padding: 18px; color: white; border-radius: 15px; margin-bottom: 20px; outline: none;
         }
 
         footer { text-align: center; padding: 40px; color: #475569; font-size: 0.8rem; border-top: 1px solid var(--border); }
     </style>
 </head>
 <body>
+
+    <svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:var(--primary);stop-opacity:1" />
+            <stop offset="100%" style="stop-color:var(--secondary);stop-opacity:1" />
+        </linearGradient>
+    </svg>
 
     <header>
         <div class="container">
@@ -138,30 +108,36 @@
     </header>
 
     <div class="container">
+        <h2 class="section-title">Our Services</h2>
         <section class="services">
             <div class="card">
-                <div class="icon"></div>
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L4.5 9.5L12 17L19.5 9.5L12 2Z M12 21L12 17L4.5 9.5L2 12L12 22L22 12L19.5 9.5L12 17L12 21Z"/></svg>
+                </div>
                 <h3>Luxury UX</h3>
                 <p style="color: var(--text-sub);">We craft high-end user interfaces that captivate your customers instantly.</p>
             </div>
+
             <div class="card">
-                <div class="icon" style="background: linear-gradient(135deg, #10b981, var(--secondary));"></div>
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M13 10h7l-9 13v-9H4l9-13v9z"/></svg>
+                </div>
                 <h3>Elite Speed</h3>
                 <p style="color: var(--text-sub);">Optimized architecture for lightning-fast performance on any device.</p>
             </div>
+
             <div class="card">
-                <div class="icon" style="background: linear-gradient(135deg, var(--primary), #ec4899);"></div>
+                <div class="icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                </div>
                 <h3>Clean Code</h3>
                 <p style="color: var(--text-sub);">Scalable and secure code built to the highest industry standards.</p>
             </div>
         </section>
 
         <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
             <div class="contact-box">
-                <div id="success-message">✓ Proposal Sent! We will contact you soon.</div>
-                
-                <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.5rem;">Get In Touch</h2>
-                
                 <form id="contact-form" action="https://formsubmit.co/ajax/jaberzain07@gmail.com" method="POST">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="text" name="name" placeholder="Full Name" required>
@@ -173,42 +149,31 @@
         </section>
     </div>
 
-    <footer>&copy; 2026 SOLOLABS DIGITAL AGENCY | PREMIUM WEB SOLUTIONS</footer>
+    <footer>&copy; 2026 SOLOLABS DIGITAL AGENCY</footer>
 
     <script>
         const form = document.getElementById('contact-form');
-        const successBox = document.getElementById('success-message');
         const submitBtn = form.querySelector('button');
 
         form.onsubmit = async (e) => {
             e.preventDefault();
-            
             submitBtn.innerText = "SENDING...";
             submitBtn.disabled = true;
 
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(new FormData(form)))
+            });
 
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    successBox.style.display = 'block';
-                    form.reset();
-                    setTimeout(() => { successBox.style.display = 'none'; }, 5000);
-                } else {
-                    alert("Submission Error. Please ensure your email is confirmed.");
-                }
-            } catch (error) {
-                alert("Please test this from a live URL (Vercel/Tiiny.host).");
-            } finally {
-                submitBtn.innerText = "SEND PROPOSAL";
-                submitBtn.disabled = false;
+            if (response.ok) {
+                alert("Message Sent Successfully!");
+                form.reset();
+            } else {
+                alert("Error sending message.");
             }
+            submitBtn.innerText = "SEND PROPOSAL";
+            submitBtn.disabled = false;
         };
     </script>
 </body>
